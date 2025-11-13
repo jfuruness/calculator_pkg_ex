@@ -11,4 +11,8 @@ class FileCalculator(Calculator):
     def sum_file(self, path=None):
         if path is None:
             path = Path(__file__).parent / "nums.csv"
-        raise NotImplementedError
+        total = 0
+        with path.open() as f:
+            for line in f:
+                total += int(line)
+        return total
