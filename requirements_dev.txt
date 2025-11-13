@@ -1,0 +1,8 @@
+tqdm
+
+types-tqdm
+pytest
+mypy
+ruff
+pre-commit
+tox
