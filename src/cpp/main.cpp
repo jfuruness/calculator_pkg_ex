@@ -1,79 +1,11 @@
 #include <pybind11/pybind11.h>
-#include <fstream>
-#include <string>
-#include <iostream>
-#include <filesystem>
+#include "Calculator.h"
+#include "CPPFileCalculator.h"
 
 #define STRINGIFY(x) #x
 #define MACRO_STRINGIFY(x) STRINGIFY(x)
 
 namespace py = pybind11;
-namespace fs = std::filesystem;
-
-// Base Calculator class
-class Calculator {
-public:
-    Calculator() {
-        std::cout << "hello!" << std::endl;
-    }
-
-    virtual ~Calculator() = default;
-
-    double add(double a, double b) {
-        return a + b;
-    }
-
-    double subtract(double a, double b) {
-        return a - b;
-    }
-
-    double multiply(double a, double b) {
-        return a * b;
-    }
-
-    double divide(double a, double b) {
-        return a / b;
-    }
-};
-
-// CPPFileCalculator class - replica of Python FileCalculator
-class CPPFileCalculator : public Calculator {
-public:
-    CPPFileCalculator() : Calculator() {}
-
-    // Using long long for very large sums (can handle up to 2^63-1)
-    // This is sufficient for adding 100 million numbers
-    long long sum_file(const std::string& path = "") {
-        std::string file_path = path;
-
-        // If no path provided, use default path relative to this module
-        if (file_path.empty()) {
-            // Default to nums.csv in the file_calculator directory
-            file_path = "src/calculator_pkg_ex/file_calculator/nums.csv";
-        }
-
-        long long total = 0;
-        std::ifstream file(file_path);
-
-        if (!file.is_open()) {
-            throw std::runtime_error("Could not open file: " + file_path);
-        }
-
-        std::string line;
-        while (std::getline(file, line)) {
-            if (!line.empty()) {
-                try {
-                    total += std::stoll(line);
-                } catch (const std::exception& e) {
-                    std::cerr << "Warning: Could not parse line: " << line << std::endl;
-                }
-            }
-        }
-
-        file.close();
-        return total;
-    }
-};
 
 PYBIND11_MODULE(_core, m, py::mod_gil_not_used(), py::multiple_interpreters::per_interpreter_gil()) {
     m.doc() = R"pbdoc(

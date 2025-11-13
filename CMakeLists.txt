@@ -14,7 +14,15 @@ find_package(pybind11 CONFIG REQUIRED)
 
 # Add a library using FindPython's tooling (pybind11 also provides a helper like
 # this)
-python_add_library(_core MODULE src/cpp/main.cpp WITH_SOABI)
+python_add_library(_core MODULE
+  src/cpp/main.cpp
+  src/cpp/src/Calculator.cpp
+  src/cpp/src/CPPFileCalculator.cpp
+  WITH_SOABI)
+
+# Add include directory for headers
+target_include_directories(_core PRIVATE src/cpp/include)
+
 target_link_libraries(_core PRIVATE pybind11::headers)
 
 # This is passing in the version as a define just as an example
