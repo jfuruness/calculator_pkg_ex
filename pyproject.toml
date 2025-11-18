@@ -1,6 +1,44 @@
 [build-system]
-requires = ["setuptools>=69.0.3", "wheel"]
-build-backend = "setuptools.build_meta"
+requires = ["scikit-build-core>=0.11", "pybind11>=3.0"]
+build-backend = "scikit_build_core.build"
+
+[tool.scikit-build]
+minimum-version = "build-system.requires"
+wheel.packages = ["src/calculator_pkg_ex"]
+
+[tool.cibuildwheel]
+build-frontend = "build[uv]"
+enable = ["pypy"]
+test-command = "python -m pytest tests"
+test-sources = ["pyproject.toml", "tests"]
+test-groups = ["test"]
+
+[tool.cibuildwheel.pyodide]
+build-frontend = {name = "build", args = ["--exports", "whole_archive"]}
+
+[tool.cibuildwheel.ios]
+build-frontend = "build"
+xbuild-tools = ["cmake", "ninja"]
+
+[tool.cibuildwheel.android]
+build-frontend = "build"
+environment.ANDROID_API_LEVEL = "24"
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 [project]
 name = "calculator_ex_pkg"
@@ -65,8 +103,10 @@ calculator_pkg_ex = ["py.typed"]
 
 # https://stackoverflow.com/a/76214408/8903959
 [tool.setuptools.packages.find]
-where = ["."]
+where = [".", "src"]
 exclude = ["scripts", "scripts.*"]
+
+
 
 [tool.pytest.ini_options]
 addopts = "-rxXs -v"  # Shows reasons for skipping, xfailing, etc
