@@ -303,6 +303,9 @@ unfixable = []
 "**/__init__.py" = ["I"]
 # tests can use private vars
 "**/tests/**/*.py" = ["SLF001"]
+# Allow print statements in CLI entrypoint and demo code
+"**/__main__.py" = ["T201"]
+"**/calculator.py" = ["T201"]
 
 [tool.ruff.lint.isort]
 known-first-party = ["calculator_pkg_ex"]
