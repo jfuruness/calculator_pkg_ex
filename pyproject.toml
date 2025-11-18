@@ -292,6 +292,8 @@ ignore = [
     "PT018",
     # This seems to want every single object to have a hash lol
     "PLW1641",
+    "T201",  # Fine for this project
+    "A001",  # fine for this project
 ]
 
 unfixable = []

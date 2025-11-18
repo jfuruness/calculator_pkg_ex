@@ -1,32 +1,54 @@
-# Require CMake 3.15+ (matching scikit-build-core) Use new versions of all
-# policies up to CMake 4.0
+# Require CMake 3.15+ and use policies up to CMake 4.0
 cmake_minimum_required(VERSION 3.15...4.0)
 
-# Scikit-build-core sets these values for you, or you can just hard-code the
-# name and version.
+# Project metadata comes from scikit-build-core
 project(
   ${SKBUILD_PROJECT_NAME}
   VERSION ${SKBUILD_PROJECT_VERSION}
-  LANGUAGES CXX)
+  LANGUAGES CXX
+)
+
+# Use C++20
+set(CMAKE_CXX_STANDARD 20)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+
+# Enable Release optimizations by default
+if(NOT CMAKE_BUILD_TYPE)
+  set(CMAKE_BUILD_TYPE Release CACHE STRING "" FORCE)
+endif()
+
+# Enable Link-Time Optimization (LTO)
+set(CMAKE_INTERPROCEDURAL_OPTIMIZATION ON)
 
 # Find pybind11 and Python
 find_package(pybind11 CONFIG REQUIRED)
 
-# Add a library using FindPython's tooling (pybind11 also provides a helper like
-# this)
+# Build the Python extension module
 python_add_library(_core MODULE
   src/cpp/main.cpp
   src/cpp/src/Calculator.cpp
   src/cpp/src/CPPFileCalculator.cpp
-  WITH_SOABI)
+  WITH_SOABI
+)
 
-# Add include directory for headers
+# Include directories for headers
 target_include_directories(_core PRIVATE src/cpp/include)
 
+# Link pybind11 headers
 target_link_libraries(_core PRIVATE pybind11::headers)
 
-# This is passing in the version as a define just as an example
-target_compile_definitions(_core PRIVATE VERSION_INFO=${PROJECT_VERSION})
+# High-performance compiler flags
+target_compile_options(_core PRIVATE
+  -O3
+  -march=native      # use all CPU features (for local builds)
+  -ffast-math        # unsafe but fast FP optimization
+)
 
-# The install directory is the output (wheel) directory
+# Remove debug checks in optimized builds
+target_compile_definitions(_core PRIVATE
+  VERSION_INFO=${PROJECT_VERSION}
+  NDEBUG
+)
+
+# Install into the wheel under the package name
 install(TARGETS _core DESTINATION calculator_pkg_ex)
