@@ -19,7 +19,7 @@ keywords = [
     "calculator_pkg_ex",
     "Python Packaging",
     "Template",
-    "Calculator"
+    "Calculator",
     "Furuness"
 ]
 classifiers = [
@@ -51,7 +51,7 @@ calculator_pkg_ex = "calculator_pkg_ex.__main__:main"
 [project.optional-dependencies]
 test = [
     "tox==4.32.0",
-    "pytest==9.0.2"
+    "pytest==9.0.2",
     "mypy==1.19.1",
     "ruff==0.14.10",
     "pre-commit==4.5.1",
