@@ -1,9 +1,8 @@
 Informational Badges:
 
-[![PyPI version](https://badge.fury.io/py/roa_collector.svg)](https://badge.fury.io/py/roa_collector)
-![PyPy](https://img.shields.io/badge/PyPy-7.3.17-blue)
-[![PyPI - Python Version](https://img.shields.io/pypi/pyversions/roa_collector)](https://pypi.org/project/roa_collector/)
-![Tests](https://github.com/jfuruness/roa_collector/actions/workflows/tests.yml/badge.svg)
+[![PyPI version](https://badge.fury.io/py/calculator_pkg_ex.svg)](https://badge.fury.io/py/calculator_pkg_ex)
+[![PyPI - Python Version](https://img.shields.io/pypi/pyversions/calculator_pkg_ex)](https://pypi.org/project/calculator_pkg_ex/)
+![Tests](https://github.com/jfuruness/calculator_pkg_ex/actions/workflows/tests.yml/badge.svg)
 ![Linux](https://img.shields.io/badge/os-Linux-blue.svg)
 ![macOS Intel](https://img.shields.io/badge/os-macOS_Intel-lightgrey.svg)
 ![macOS ARM](https://img.shields.io/badge/os-macOS_ARM-lightgrey.svg)
@@ -17,7 +16,7 @@ Some Linting Badges (Where I could find them):
 [![Pylint](https://img.shields.io/badge/linting-pylint-yellowgreen)](https://github.com/pylint-dev/pylint/tree/main)
 [![try/except style: tryceratops](https://img.shields.io/badge/try%2Fexcept%20style-tryceratops%20%F0%9F%A6%96%E2%9C%A8-black)](https://github.com/guilatrova/tryceratops)
 
-# roa\_collector
+# calculator\_pkg\_ex
 
 
 ### If you like the repo, it would be awesome if you could add a star to it! It really helps out the visibility. Also for any questions at all we'd love to hear from you at jfuruness@gmail.com
@@ -31,33 +30,26 @@ Some Linting Badges (Where I could find them):
 
 ## Package Description
 
-Downloads ROAs from https://rpki-validator.ripe.net/api/export.json,
-inserts them in a CSV,
-and returns them as a list of ROA dataclasses (containing asn, prefix, max_length, and ta properties, where ta is RIPE, afrinic, etc)
+Calculator Python Package Example/Template
 
 ## Usage
-* [roa\_collector](#roa\_collector)
+* [calculator\_pkg\_ex](#calculator\_pkg\_ex)
 
 from a script:
 
 ```python
-from pathlib import Path
-
-from roa_collector import ROACollector
-
-csv_path = Path("/tmp/my_csv_path.csv")  # or set to None to avoid writing
-roas = ROACollector(csv_path).run()
+from calculator_pkg_ex import Calculator
+print(Calculator().add(1, 2))
 ```
 
 ## Installation
-* [roa\_collector](#roa\_collector)
+* [calculator\_pkg\_ex](#calculator\_pkg\_ex)
 
 Install python and pip if you have not already.
 
 Then run:
 
 ```bash
-# Needed for graphviz and Pillow
 pip3 install pip --upgrade
 pip3 install wheel
 ```
@@ -65,16 +57,16 @@ pip3 install wheel
 For production:
 
 ```bash
-pip3 install roa_collector
+pip3 install calculator_pkg_ex
 ```
 
 This will install the package and all of it's python dependencies.
 
 If you want to install the project for development:
 ```bash
-git clone https://github.com/jfuruness/roa_collector.git
-cd roa_collector
-pip3 install -e .[test]
+git clone https://github.com/jfuruness/calculator_pkg_ex.git
+cd calculator_pkg_ex
+pip3 install -e ".[test]"
 pre-commit install
 ```
 
@@ -82,28 +74,28 @@ To test the development package: [Testing](#testing)
 
 
 ## Testing
-* [roa\_collector](#roa\_collector)
+* [calculator\_pkg\_ex](#calculator\_pkg\_ex)
 
 To test the package after installation:
 
 ```
-cd roa_collector
-pytest roa_collector
-ruff check roa_collector
-ruff format roa_collector
-mypy roa_collector
+cd calculator_pkg_ex
+pytest calculator_pkg_ex
+ruff check calculator_pkg_ex
+ruff format calculator_pkg_ex
+mypy calculator_pkg_ex
 ```
 
-If you want to run it across multiple environments, and have python 3.10 and 3.11 installed:
+If you want to run it across multiple environments:
 
 ```
-cd roa_collector
+cd calculator_pkg_ex
 tox --skip-missing-interpreters
 ```
 
 
 ## Development/Contributing
-* [roa\_collector](#roa\_collector)
+* [calculator\_pkg\_ex](#calculator\_pkg\_ex)
 
 1. Fork it!
 2. Create your feature branch: `git checkout -b my-new-feature`
@@ -115,6 +107,6 @@ tox --skip-missing-interpreters
 9. Email me at jfuruness@gmail.com if it's been a while and I haven't seen it
 
 ## License
-* [roa\_collector](#roa\_collector)
+* [calculator\_pkg\_ex](#calculator\_pkg\_ex)
 
-BSD License (see license file)
+MIT License (see license file)
