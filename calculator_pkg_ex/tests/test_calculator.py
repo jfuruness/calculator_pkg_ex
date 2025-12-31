@@ -3,13 +3,14 @@ from ..calculator import Calculator
 
 import pytest
 
+
 class TestCalculator:
     def test_add(self) -> None:
         assert Calculator().add(1, 2) == 3, "Add failed"
 
     def test_subtract(self) -> None:
         assert Calculator().subtract(1, 2) == -1, "Subtract failed"
-    
+
     def test_multiply(self) -> None:
         assert Calculator().multiply(3, 2) == 6, "Multiply failed"
 
