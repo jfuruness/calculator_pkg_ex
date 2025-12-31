@@ -12,13 +12,13 @@ class FileCalculator(Calculator):
     ) -> None:
         self.path: Path = path
 
-    def add_file(self) -> int | None:
-        total: int | None = None
+    def add_file(self) -> float | None:
+        total: float | None = None
         with open(self.path) as f:
             for line in f:
                 if total is None:
-                    total = int(line)
+                    total = float(line)
                     continue
                 else:
-                    total += int(line)
+                    total += float(line)
         return total
