@@ -2,7 +2,7 @@ from .calculator import Calculator
 
 
 def main() -> None:
-    print(Calculator().add(1, 2))
+    print(Calculator().add(1, 2))  # noqa
 
 
 if __name__ == "__main__":

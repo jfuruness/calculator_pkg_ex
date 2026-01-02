@@ -1,9 +1,10 @@
-from pathlib import Path
 import time
+from pathlib import Path
 
 from tqdm import tqdm
 
-from ..calculator import Calculator
+from ..calculator import Calculator  # noqa
+
 # from calculator_pkg_ex.calculator import Calculator
 
 
@@ -20,9 +21,7 @@ class FileCalculator(Calculator):
         total: float = 0
         with open(self.path) as f:
             for line in tqdm(
-                f,
-                total=self.expected_lines,
-                desc="Summing lines in file"
+                f, total=self.expected_lines, desc="Summing lines in file"
             ):
                 time.sleep(2)
                 total += float(line)

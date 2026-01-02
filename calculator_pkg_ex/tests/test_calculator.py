@@ -1,7 +1,7 @@
-from ..calculator import Calculator
 # from calculator_pkg_ex import Calculator
-
 import pytest
+
+from ..calculator import Calculator  # noqa
 
 
 class TestCalculator:
